@@ -43,4 +43,19 @@ func main() {
 		ID: %d`, r.GetName(), r.GetAge(), r.GetId())
 
 	}
+
+	// Get Users Client
+	params := &pb.GetUsersParams{}
+	r, err := c.GetUsers(ctx, params)
+	if err != nil {
+		log.Fatalf("could not create user: %v", err)
+	}
+	log.Print("\nUSER LIST: \n")
+	// Print the user list
+	for _, user := range r.GetUsers() {
+		log.Printf(`User Details:
+		NAME: %s
+		AGE: %d
+		ID: %d`, user.GetName(), user.GetAge(), user.GetId())
+	}
 }
